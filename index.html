@@ -8,7 +8,6 @@
   <style>
     :root {
       --bg: #f6f7fb;
-      --paper: #fff;
       --ink: #1f2937;
       --muted: #6b7280;
       --accent: #2563eb;
@@ -16,135 +15,60 @@
       --danger: #ef4444;
       --line: #e5e7eb;
       --card: #ffffff;
-      --shadow: 0 8px 24px rgba(17, 24, 39, 0.08);
+      --shadow: 0 8px 24px rgba(17,24,39,0.08);
       --radius: 14px;
     }
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      background: radial-gradient(600px 300px at 20% -10%, #ebf2ff 0%, rgba(255,255,255,0) 50%), var(--bg);
-      color: var(--ink);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      line-height: 1.45;
-    }
-
-    header {
-      position: sticky; top: 0; z-index: 20;
-      background: rgba(255,255,255,0.8);
-      backdrop-filter: saturate(1.2) blur(8px);
-      border-bottom: 1px solid var(--line);
-    }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height: 1.45; }
+    header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,0.9); backdrop-filter: saturate(1.2) blur(8px); border-bottom: 1px solid var(--line); }
     .container { max-width: 1200px; margin: 0 auto; padding: 16px; }
-
     .title { display: flex; align-items: center; gap: 12px; padding: 4px 0; }
     .title h1 { margin: 0; font-size: 22px; letter-spacing: 0.3px; }
-    .filters {
-      display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 0 12px; align-items: center;
-    }
-
-    .btn, .chip, .tag {
-      border: 1px solid var(--line); background: #fff; color: var(--ink);
-      padding: 8px 12px; border-radius: 10px; cursor: pointer;
-      transition: all .15s ease; font-weight: 600; font-size: 14px;
-    }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 0 12px; align-items: center; }
+    .btn, .chip, .tag { border: 1px solid var(--line); background: #fff; color: var(--ink); padding: 8px 12px; border-radius: 10px; cursor: pointer; transition: all .15s ease; font-weight: 600; font-size: 14px; }
     .btn:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
     .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
     .btn.success { background: var(--accent-2); color: #fff; border-color: var(--accent-2); }
     .btn.danger { background: var(--danger); color: #fff; border-color: var(--danger); }
     .chip.active { border-color: var(--accent); color: var(--accent); background: #eef2ff; }
-    .tag { font-weight: 500; }
-
-    .layout {
-      display: grid; gap: 18px; align-items: start;
-      grid-template-columns: 380px 1fr 360px;
-      padding: 14px 0 24px;
-    }
+    .layout { display: grid; gap: 18px; align-items: start; grid-template-columns: 380px 1fr 360px; padding: 14px 0 24px; }
     @media (max-width: 1150px) { .layout { grid-template-columns: 1fr; } }
-
-    /* Panels */
     .panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
     .panel-header { padding: 14px 16px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
     .panel-body { padding: 14px; }
-
-    /* Ledger */
     .ledger h2 { margin: 0; font-size: 18px; font-family: "Spectral", Georgia, serif; }
-    .sheet {
-      background: linear-gradient(transparent 31px, #f3f4f6 32px), #fff;
-      background-size: 100% 32px;
-      border: 1px dashed #e5e7eb; border-radius: 12px; overflow: hidden;
-    }
-    .row {
-      display: grid; grid-template-columns: 1fr; padding: 10px 12px; gap: 8px;
-      border-bottom: 1px dashed #f0f0f0;
-    }
+    .sheet { border: 1px dashed #e5e7eb; border-radius: 12px; overflow: hidden; background:#fff; }
+    .row { display: grid; grid-template-columns: 1fr; padding: 10px 12px; gap: 8px; border-bottom: 1px dashed #f0f0f0; }
     .row:last-child { border-bottom: none; }
     label { font-size: 12px; color: var(--muted); font-weight: 600; }
-    input, select, textarea {
-      width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #d1d5db; background: #fff; font-size: 14px;
-      outline: none;
-    }
+    input, select, textarea { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #d1d5db; background: #fff; font-size: 14px; outline: none; }
     input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
-    input[type="date"] { padding: 9px 12px; }
     .amount { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
     .actions { display: flex; gap: 8px; padding: 12px; justify-content: space-between; align-items: center; }
-    .actions .right { display: flex; gap: 8px; }
-
-    /* List */
     .list { max-height: 60vh; overflow: auto; }
-    .expense {
-      display: grid; grid-template-columns: 120px 1fr 120px 80px; gap: 12px;
-      padding: 14px 16px; border-bottom: 1px solid #f1f5f9; align-items: center;
-    }
-    @media (max-width: 640px) {
-      .expense { grid-template-columns: 1fr 100px 80px; }
-      .expense .meta { order: -1; margin-bottom: 6px; }
-      .expense .datecat { display: none; }
-    }
+    .expense { display: grid; grid-template-columns: 120px 1fr 120px 80px; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #f1f5f9; align-items: center; }
+    @media (max-width: 640px) { .expense { grid-template-columns: 1fr 100px 80px; } .expense .datecat { display: none; } .expense .meta { order: -1; } }
     .expense .amt { font-weight: 800; font-family: ui-monospace, Menlo, monospace; text-align: right; }
     .expense .cat { font-size: 12px; color: var(--muted); }
-    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 999px; border: 1px solid #e5e7eb; font-size: 12px; background:#f9fafb; }
-    .icon-btn {
-      width: 32px; height: 32px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center;
-      border: 1px solid #e5e7eb; background: #fff; cursor: pointer; margin-left: 6px;
-    }
+    .icon-btn { width: 32px; height: 32px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #e5e7eb; background: #fff; cursor: pointer; margin-left: 6px; }
     .icon-btn:hover { background: #eef2ff; border-color: #c7d2fe; }
     .icon-btn.danger:hover { background: #fff1f1; border-color: #fecaca; }
-
-    /* Inline edit */
-    .edit-grid {
-      display: grid; gap: 8px;
-      grid-template-columns: 120px 1fr 120px 1fr;
-      align-items: center;
-    }
+    .edit-grid { display: grid; gap: 8px; grid-template-columns: 120px 1fr 120px 1fr; align-items: center; }
     .edit-actions { display: flex; gap: 8px; justify-content: flex-end; }
-
-    /* Summary */
     .summary-wrap { display: grid; gap: 12px; }
-    .sum-card {
-      border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: #fff;
-      display: grid; gap: 10px;
-    }
+    .sum-card { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: #fff; display: grid; gap: 10px; }
     .sum-row { display: flex; justify-content: space-between; align-items: center; font-size: 15px; }
-    .sum-row strong { font-size: 16px; }
     .sum-total { font-size: 22px; font-weight: 800; font-family: ui-monospace, Menlo, monospace; }
     .sum-grid { display: grid; gap: 10px; grid-template-columns: 1fr; }
     .mini-row { display: flex; justify-content: space-between; gap: 8px; }
     .mini-row .lbl { color: var(--muted); }
     .mini-row .amt { font-weight: 700; font-family: ui-monospace, Menlo, monospace; }
-
-    .empty { padding: 18px 16px; color: var(--muted); }
-    footer { padding: 24px; text-align: center; color: var(--muted); font-size: 12px; }
-
-    /* FAB */
-    .fab {
-      position: fixed; right: 16px; bottom: 16px; z-index: 30;
-      display: none; padding: 12px 16px; border-radius: 999px;
-    }
+    .fab { position: fixed; right: 16px; bottom: 16px; z-index: 30; display: none; padding: 12px 16px; border-radius: 999px; }
     @media (max-width: 1150px) { .fab { display: inline-flex; } }
+    .muted { color: var(--muted); }
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -159,15 +83,12 @@
         <button class="chip" data-range="week">This Week</button>
         <button class="chip" data-range="month">This Month</button>
         <button class="chip" data-range="all">All</button>
-
-        <span class="muted" style="margin-left: 8px">Custom:</span>
+        <span class="muted" style="margin-left:8px">Custom:</span>
         <input type="date" id="fromDate" />
         <span class="muted">to</span>
         <input type="date" id="toDate" />
         <button class="btn" id="applyRange">Apply</button>
-
-        <div style="flex: 1"></div>
-
+        <div style="flex:1"></div>
         <button class="btn" id="exportBtn">Export JSON</button>
         <button class="btn danger" id="clearBtn" title="Clear all data">Clear</button>
       </div>
@@ -176,7 +97,6 @@
 
   <div class="container">
     <div class="layout">
-      <!-- Ledger Panel -->
       <div class="panel ledger">
         <div class="panel-header">
           <h2>Ledger Entry</h2>
@@ -206,7 +126,7 @@
             </div>
             <div class="actions">
               <div class="left">
-                <button class="btn success" id="manageCatsBtn" title="Manage categories">Manage Categories</button>
+                <button class="btn success" id="manageCatsBtn">Manage Categories</button>
               </div>
               <div class="right">
                 <button class="btn" id="resetBtn">Reset</button>
@@ -217,17 +137,15 @@
         </div>
       </div>
 
-      <!-- Expense List -->
       <div class="panel">
         <div class="panel-header">
           <strong>Expenses</strong>
           <div class="muted" id="countInfo">0 items</div>
         </div>
         <div class="list" id="list"></div>
-        <div class="empty" id="emptyList">No expenses yet. Add from the ledger.</div>
+        <div class="muted" id="emptyList">No expenses yet. Add from the ledger.</div>
       </div>
 
-      <!-- Summary -->
       <div class="panel">
         <div class="panel-header">
           <strong>Summary</strong>
@@ -240,14 +158,12 @@
               <div class="sum-row"><span class="muted">Average per day</span><span id="avgPerDay" class="amt">₹0</span></div>
               <div class="sum-row"><span class="muted">Number of days</span><span id="daysCount" class="amt">0</span></div>
             </div>
-
             <div class="sum-card">
-              <div style="font-weight: 700">By Category</div>
+              <div style="font-weight:700">By Category</div>
               <div id="catGrid" class="sum-grid"></div>
             </div>
-
             <div class="sum-card">
-              <div style="font-weight: 700">By Person</div>
+              <div style="font-weight:700">By Person</div>
               <div id="personGrid" class="sum-grid"></div>
             </div>
           </div>
@@ -258,385 +174,207 @@
 
   <button class="btn primary fab" id="quickAdd">Add Expense</button>
 
-  <footer>Built for easy daily tracking — Data stays in your browser</footer>
+  <footer class="muted" style="text-align:center; padding:24px">Shared for everyone — powered by Vercel KV (no login)</footer>
 
   <script>
-    (function () {
-      const lsKey = "expense-tracker:v5";
-      const catKey = "expense-tracker:categories";
-      const defaultCats = ["Groceries","Food","Entertainment","Transport","Utilities","Medical","Education","Others"];
+    const API_BASE = '';
 
-      const state = {
-        expenses: loadExpenses(),
-        categories: loadCategories(),
-        filter: { from: null, to: null, preset: "month" },
-      };
+    const defaultCats = ["Groceries","Food","Entertainment","Transport","Utilities","Medical","Education","Others"];
+    const state = { expenses: [], categories: [], filter: { from: null, to: null, preset: 'month' }};
 
-      // Elements
-      const listEl = document.getElementById("list");
-      const emptyEl = document.getElementById("emptyList");
-      const countInfo = document.getElementById("countInfo");
-      const totalAmt = document.getElementById("totalAmt");
-      const avgPerDay = document.getElementById("avgPerDay");
-      const daysCount = document.getElementById("daysCount");
-      const catGrid = document.getElementById("catGrid");
-      const personGrid = document.getElementById("personGrid");
-      const summaryRange = document.getElementById("summaryRange");
-      const todayTag = document.getElementById("todayTag");
+    const listEl=document.getElementById('list'), emptyEl=document.getElementById('emptyList'), countInfo=document.getElementById('countInfo');
+    const totalAmt=document.getElementById('totalAmt'), avgPerDay=document.getElementById('avgPerDay'), daysCount=document.getElementById('daysCount');
+    const catGrid=document.getElementById('catGrid'), personGrid=document.getElementById('personGrid'), summaryRange=document.getElementById('summaryRange'), todayTag=document.getElementById('todayTag');
+    const dateEl=document.getElementById('date'), amountEl=document.getElementById('amount'), categoryEl=document.getElementById('category'), paidByEl=document.getElementById('paidBy'), noteEl=document.getElementById('note');
+    const addBtn=document.getElementById('addBtn'), resetBtn=document.getElementById('resetBtn'), quickAdd=document.getElementById('quickAdd'), manageCatsBtn=document.getElementById('manageCatsBtn');
+    const chips=document.querySelectorAll('.chip'), fromDate=document.getElementById('fromDate'), toDate=document.getElementById('toDate'), applyRange=document.getElementById('applyRange');
+    const clearBtn=document.getElementById('clearBtn'), exportBtn=document.getElementById('exportBtn');
 
-      // Form elements
-      const dateEl = document.getElementById("date");
-      const amountEl = document.getElementById("amount");
-      const categoryEl = document.getElementById("category");
-      const paidByEl = document.getElementById("paidBy");
-      const noteEl = document.getElementById("note");
-      const addBtn = document.getElementById("addBtn");
-      const resetBtn = document.getElementById("resetBtn");
-      const quickAdd = document.getElementById("quickAdd");
-      const manageCatsBtn = document.getElementById("manageCatsBtn");
+    function rupees(n){ const v=Number(n||0); return '₹'+v.toLocaleString('en-IN',{maximumFractionDigits:2, minimumFractionDigits: v%1?2:0}); }
+    function todayISO(){ return new Date().toISOString().slice(0,10); }
+    function humanDate(iso){ try{ const d=new Date(iso); return d.toLocaleDateString('en-IN',{weekday:'short', day:'2-digit', month:'short'});}catch{ return iso; } }
+    function startOfWeek(d){ const dt=new Date(d); const day=(dt.getDay()+6)%7; dt.setDate(dt.getDate()-day); return dt.toISOString().slice(0,10); }
+    function endOfWeek(d){ const s=new Date(startOfWeek(d)); s.setDate(s.getDate()+6); return s.toISOString().slice(0,10); }
+    function startOfMonth(d){ const dt=new Date(d); dt.setDate(1); return dt.toISOString().slice(0,10); }
+    function endOfMonth(d){ const dt=new Date(d); dt.setMonth(dt.getMonth()+1); dt.setDate(0); return dt.toISOString().slice(0,10); }
+    function inRange(dateISO, from, to){ if(from && dateISO<from) return false; if(to && dateISO>to) return false; return true; }
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+    function escapeAttr(s){ return String(s).replace(/"/g,'&quot;'); }
+    function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+    function uid(){ return Math.random().toString(36).slice(2,10); }
 
-      // Filters
-      const chips = document.querySelectorAll(".chip");
-      const fromDate = document.getElementById("fromDate");
-      const toDate = document.getElementById("toDate");
-      const applyRange = document.getElementById("applyRange");
+    async function apiGet(path){ const r=await fetch(API_BASE+path,{cache:'no-store'}); if(!r.ok) throw new Error(await r.text()); return r.json(); }
+    async function apiSend(path, method, body){ const r=await fetch(API_BASE+path,{ method, headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)}); if(!r.ok) throw new Error(await r.text()); return r.json(); }
 
-      // Header buttons
-      const clearBtn = document.getElementById("clearBtn");
-      const exportBtn = document.getElementById("exportBtn");
-
-      // Init defaults
-      dateEl.value = todayISO();
-      todayTag.textContent = "Today: " + humanDate(dateEl.value);
-      amountEl.value = "";
-      paidByEl.value = "";
-      noteEl.value = "";
+    async function loadCategories(){
+      try{
+        const data = await apiGet('/api/categories');
+        state.categories = data.categories && data.categories.length ? data.categories : defaultCats.slice();
+      } catch {
+        state.categories = defaultCats.slice();
+      }
       ensureCatsInSelect();
-
-      // Range chips
-      chips.forEach((c) =>
-        c.addEventListener("click", () => {
-          chips.forEach((x) => x.classList.remove("active"));
-          c.classList.add("active");
-          const now = todayISO();
-          if (c.dataset.range === "week") {
-            state.filter.preset = "week";
-            state.filter.from = startOfWeek(now);
-            state.filter.to = endOfWeek(now);
-          } else if (c.dataset.range === "month") {
-            state.filter.preset = "month";
-            state.filter.from = startOfMonth(now);
-            state.filter.to = endOfMonth(now);
-          } else {
-            state.filter.preset = "all";
-            state.filter.from = null;
-            state.filter.to = null;
-          }
-          fromDate.value = state.filter.from || "";
-          toDate.value = state.filter.to || "";
-          render();
-        })
-      );
-
-      applyRange.addEventListener("click", () => {
-        state.filter.preset = "custom";
-        state.filter.from = fromDate.value || null;
-        state.filter.to = toDate.value || null;
-        chips.forEach((x) => x.classList.remove("active"));
-        render();
+    }
+    function ensureCatsInSelect(focus){
+      categoryEl.innerHTML = '';
+      state.categories.forEach(c => {
+        const opt=document.createElement('option'); opt.value=c; opt.textContent=c; categoryEl.appendChild(opt);
       });
+      categoryEl.value = focus || state.categories;
+    }
 
-      // Category manager
-      manageCatsBtn.addEventListener("click", () => {
-        const name = prompt("Add a new category name (or leave blank to manage removals). To remove, type -<name> (e.g., -Snacks)");
-        if (name === null) return;
-        const val = name.trim();
-        if (!val) return;
-        if (val.startsWith("-")) {
+    async function fetchExpenses(){
+      const data = await apiGet('/api/expenses');
+      return Array.isArray(data.expenses) ? data.expenses : [];
+    }
+    async function addExpenseToServer(item){
+      return apiSend('/api/expenses','POST', item);
+    }
+    async function updateExpenseOnServer(id, patch){
+      return apiSend('/api/expenses','PUT', { id, patch });
+    }
+    async function deleteExpenseOnServer(id){
+      return apiSend('/api/expenses','DELETE', { id });
+    }
+
+    chips.forEach(c => c.addEventListener('click', async () => {
+      chips.forEach(x => x.classList.remove('active')); c.classList.add('active');
+      const now=todayISO();
+      if(c.dataset.range==='week'){ state.filter.preset='week'; state.filter.from=startOfWeek(now); state.filter.to=endOfWeek(now); }
+      else if(c.dataset.range==='month'){ state.filter.preset='month'; state.filter.from=startOfMonth(now); state.filter.to=endOfMonth(now); }
+      else { state.filter.preset='all'; state.filter.from=null; state.filter.to=null; }
+      fromDate.value=state.filter.from||''; toDate.value=state.filter.to||'';
+      state.expenses = await fetchExpenses();
+      render();
+    }));
+    applyRange.addEventListener('click', async () => {
+      state.filter.preset='custom'; state.filter.from=fromDate.value||null; state.filter.to=toDate.value||null;
+      chips.forEach(x=>x.classList.remove('active'));
+      state.expenses = await fetchExpenses();
+      render();
+    });
+
+    manageCatsBtn.addEventListener('click', async () => {
+      const name = prompt('Add a new category (or type -<name> to remove). Example: -Snacks');
+      if(name===null) return;
+      const val = name.trim(); if(!val) return;
+      try{
+        if(val.startsWith('-')){
           const toRemove = val.slice(1).trim();
-          const idx = state.categories.findIndex(c => c.toLowerCase() === toRemove.toLowerCase());
-          if (idx >= 0) {
-            if (!confirm(`Remove category "${state.categories[idx]}"?`)) return;
-            state.categories.splice(idx, 1);
-            saveCategories();
-            ensureCatsInSelect();
-            render();
-          } else {
-            alert("Category not found.");
-          }
+          await apiSend('/api/categories','DELETE',{ name: toRemove });
         } else {
-          if (state.categories.some(c => c.toLowerCase() === val.toLowerCase())) {
-            alert("Category already exists.");
-            return;
-          }
-          state.categories.push(capitalize(val));
-          saveCategories();
-          ensureCatsInSelect(val);
+          await apiSend('/api/categories','POST',{ name: capitalize(val) });
         }
-      });
+      } catch(e){ /* ignore */ }
+      await loadCategories();
+      render();
+    });
 
-      // Add expense
-      addBtn.addEventListener("click", addExpense);
-      quickAdd.addEventListener("click", addExpense);
-
-      function addExpense() {
-        const date = dateEl.value || todayISO();
-        const amount = parseFloat(amountEl.value);
-        const category = categoryEl.value || "Others";
-        const paidBy = (paidByEl.value || "Unknown").trim();
-        const note = (noteEl.value || "").trim();
-
-        if (!(amount > 0)) {
-          alert("Please enter a valid amount.");
-          amountEl.focus();
-          return;
-        }
-        const item = { id: uid(), date, amount, category, paidBy, note };
-        state.expenses.push(item);
-        saveExpenses();
+    addBtn.addEventListener('click', addExpense);
+    quickAdd.addEventListener('click', addExpense);
+    async function addExpense(){
+      const date=dateEl.value||todayISO();
+      const amount=parseFloat(amountEl.value);
+      const category=categoryEl.value||'Others';
+      const paidBy=(paidByEl.value||'Unknown').trim();
+      const note=(noteEl.value||'').trim();
+      if(!(amount>0)){ alert('Please enter a valid amount.'); amountEl.focus(); return; }
+      try{
+        await addExpenseToServer({ id: uid(), date, amount, category, paidBy, note });
         clearForm();
+        state.expenses = await fetchExpenses();
         render();
-      }
+      } catch(e){ console.error(e); alert('Failed to add expense.'); }
+    }
 
-      resetBtn.addEventListener("click", clearForm);
-      function clearForm() {
-        dateEl.value = todayISO();
-        todayTag.textContent = "Today: " + humanDate(dateEl.value);
-        amountEl.value = "";
-        categoryEl.value = state.categories || "Groceries";
-        paidByEl.value = "";
-        noteEl.value = "";
-      }
+    resetBtn.addEventListener('click', clearForm);
+    function clearForm(){ dateEl.value=todayISO(); todayTag.textContent='Today: '+humanDate(dateEl.value); amountEl.value=''; categoryEl.value=state.categories||'Groceries'; paidByEl.value=''; noteEl.value=''; }
 
-      clearBtn.addEventListener("click", () => {
-        if (confirm("This will clear all expenses. Continue?")) {
-          state.expenses = [];
-          saveExpenses();
-          render();
-        }
-      });
-
-      exportBtn.addEventListener("click", () => {
-        const data = JSON.stringify({ expenses: state.expenses, categories: state.categories }, null, 2);
-        const blob = new Blob([data], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "expenses.json";
-        a.click();
-        URL.revokeObjectURL(url);
-      });
-
-      function deleteExpense(id) {
-        state.expenses = state.expenses.filter((e) => e.id !== id);
-        saveExpenses();
+    clearBtn.addEventListener('click', async () => {
+      if(!confirm('This will delete ALL expenses for everyone. Continue?')) return;
+      try{
+        await apiSend('/api/expenses','DELETE',{ all:true });
+        state.expenses = [];
         render();
-      }
+      } catch(e){ console.error(e); alert('Failed to clear.'); }
+    });
 
-      // Inline edit
-      function startEdit(id, rowEl) {
-        const exp = state.expenses.find(x => x.id === id);
-        if (!exp) return;
+    exportBtn.addEventListener('click', () => {
+      const data = JSON.stringify(state.expenses, null, 2);
+      const blob = new Blob([data], { type:'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download='expenses.json'; a.click(); URL.revokeObjectURL(url);
+    });
 
-        const editEl = document.createElement("div");
-        editEl.className = "edit-grid";
-        editEl.innerHTML = `
-          <label>Date</label>
-          <input type="date" value="${exp.date}" data-field="date" />
-          <label>Amount (₹)</label>
-          <input type="number" value="${String(exp.amount)}" min="0" step="0.01" data-field="amount" class="amount" />
-          <label>Category</label>
-          <select data-field="category">${state.categories.map(c=>`<option ${c===exp.category?'selected':''}>${escapeHtml(c)}</option>`).join('')}</select>
-          <label>Spent by</label>
-          <input type="text" value="${escapeAttr(exp.paidBy)}" data-field="paidBy" />
-          <label>Note</label>
-          <input type="text" value="${escapeAttr(exp.note||'')}" data-field="note" />
-          <div class="edit-actions" style="grid-column: 1 / -1;">
-            <button class="btn" data-action="cancel">Cancel</button>
-            <button class="btn primary" data-action="save">Save</button>
-          </div>
-        `;
-        rowEl.innerHTML = "";
-        rowEl.appendChild(editEl);
-
-        editEl.querySelector('[data-action="cancel"]').addEventListener('click', render);
-        editEl.querySelector('[data-action="save"]').addEventListener('click', () => {
-          const fields = editEl.querySelectorAll('[data-field]');
-          const updated = { ...exp };
-          fields.forEach(inp => {
-            const key = inp.getAttribute('data-field');
-            let val = inp.value;
-            if (key === 'amount') val = parseFloat(val);
-            updated[key] = val;
-          });
-          if (!(updated.amount > 0)) {
-            alert('Amount must be greater than 0.');
-            return;
-          }
-          const idx = state.expenses.findIndex(x => x.id === id);
-          if (idx >= 0) state.expenses[idx] = updated;
-          saveExpenses();
+    function startEdit(id, rowEl){
+      const exp = state.expenses.find(x=>x.id===id); if(!exp) return;
+      const editEl=document.createElement('div'); editEl.className='edit-grid';
+      editEl.innerHTML=`
+        <label>Date</label><input type="date" value="${exp.date}" data-field="date" />
+        <label>Amount (₹)</label><input type="number" value="${String(exp.amount)}" min="0" step="0.01" data-field="amount" class="amount" />
+        <label>Category</label><select data-field="category">${state.categories.map(c=>`<option ${c===exp.category?'selected':''}>${escapeHtml(c)}</option>`).join('')}</select>
+        <label>Spent by</label><input type="text" value="${escapeAttr(exp.paidBy)}" data-field="paidBy" />
+        <label>Note</label><input type="text" value="${escapeAttr(exp.note||'')}" data-field="note" />
+        <div class="edit-actions" style="grid-column:1/-1;">
+          <button class="btn" data-action="cancel">Cancel</button>
+          <button class="btn primary" data-action="save">Save</button>
+        </div>`;
+      rowEl.innerHTML=''; rowEl.appendChild(editEl);
+      editEl.querySelector('[data-action="cancel"]').addEventListener('click', render);
+      editEl.querySelector('[data-action="save"]').addEventListener('click', async () => {
+        const fields = editEl.querySelectorAll('[data-field]');
+        const patch={}; fields.forEach(inp=>{ const k=inp.getAttribute('data-field'); let v=inp.value; if(k==='amount') v=parseFloat(v); patch[k]=v; });
+        if(!(patch.amount>0)){ alert('Amount must be > 0'); return; }
+        try{
+          await updateExpenseOnServer(id, patch);
+          state.expenses = await fetchExpenses();
           render();
+        } catch(e){ console.error(e); alert('Failed to update.'); }
+      });
+    }
+
+    function render(){
+      const f=state.filter;
+      const items=state.expenses.slice().sort((a,b)=>b.date.localeCompare(a.date) || (b.createdAt||'').localeCompare(a.createdAt||'')).filter(e=>inRange(e.date, f.from, f.to));
+      listEl.innerHTML='';
+      if(!items.length){ emptyEl.style.display='block'; countInfo.textContent='0 items'; }
+      else{
+        emptyEl.style.display='none';
+        countInfo.textContent=items.length+' item'+(items.length>1?'s':'');
+        items.forEach(e=>{
+          const row=document.createElement('div'); row.className='expense';
+          row.innerHTML=`
+            <div class="datecat"><div>${e.date}</div><div class="cat">${escapeHtml(e.category)}</div></div>
+            <div class="meta"><div>${e.note?escapeHtml(e.note):'<span class="cat">No note</span>'}</div><div class="cat">Spent by: ${escapeHtml(e.paidBy)}</div></div>
+            <div class="amt">${rupees(e.amount)}</div>
+            <div class="actions-cell" style="text-align:right">
+              <button class="icon-btn" title="Edit" aria-label="Edit">✏️</button>
+              <button class="icon-btn danger" title="Delete" aria-label="Delete">🗑️</button>
+            </div>`;
+          const [editBtn, delBtn]=row.querySelectorAll('.icon-btn');
+          editBtn.addEventListener('click', ()=>startEdit(e.id, row));
+          delBtn.addEventListener('click', async ()=>{ if(!confirm('Delete this expense?')) return; await deleteExpenseOnServer(e.id); state.expenses=await fetchExpenses(); render(); });
+          listEl.appendChild(row);
         });
       }
+      summaryRange.textContent = (!f.from && !f.to) ? 'All time' : (f.from||'…')+' to '+(f.to||'…');
+      const total = items.reduce((s,e)=>s+Number(e.amount||0),0); totalAmt.textContent=rupees(total);
+      let days=0; if(items.length){ const minDate=items[items.length-1].date; const maxDate=items.date; const d1=new Date(minDate), d2=new Date(maxDate); days=Math.max(1, Math.round((d2-d1)/86400000)+1); }
+      daysCount.textContent=String(days||0); const avg=total/(days||1); avgPerDay.textContent=rupees(avg);
+      const byCat={}; items.forEach(e=>byCat[e.category]=(byCat[e.category]||0)+Number(e.amount));
+      fillGrid(catGrid, byCat);
+      const byPerson={}; items.forEach(e=>{ const k=e.paidBy||'Unknown'; byPerson[k]=(byPerson[k]||0)+Number(e.amount); });
+      fillGrid(personGrid, byPerson);
+    }
+    function fillGrid(el,map){ const entries=Object.entries(map).sort((a,b)=>b-a); el.innerHTML=''; if(!entries.length){ el.innerHTML='<div class="muted">No data</div>'; return; } entries.forEach(([k,v])=>{ const row=document.createElement('div'); row.className='mini-row'; row.innerHTML=`<span class="lbl">${escapeHtml(k)}</span><span class="amt">${rupees(v)}</span>`; el.appendChild(row); }); }
 
-      // Render
-      function render() {
-        const f = state.filter;
-        const items = state.expenses
-          .slice()
-          .sort((a, b) => b.date.localeCompare(a.date))
-          .filter((e) => inRange(e.date, f.from, f.to));
+    document.querySelector('.chip[data-range="month"]').classList.add('active');
+    const now = todayISO(); state.filter.from=startOfMonth(now); state.filter.to=endOfMonth(now);
+    fromDate.value=state.filter.from; toDate.value=state.filter.to; dateEl.value=todayISO(); todayTag.textContent='Today: '+humanDate(dateEl.value);
 
-        // List
-        listEl.innerHTML = "";
-        if (items.length === 0) {
-          emptyEl.style.display = "block";
-          countInfo.textContent = "0 items";
-        } else {
-          emptyEl.style.display = "none";
-          countInfo.textContent = items.length + " item" + (items.length > 1 ? "s" : "");
-          items.forEach((e) => {
-            const row = document.createElement("div");
-            row.className = "expense";
-            row.innerHTML = `
-              <div class="datecat">
-                <div>${e.date}</div>
-                <div class="cat">${escapeHtml(e.category)}</div>
-              </div>
-              <div class="meta">
-                <div>${e.note ? escapeHtml(e.note) : '<span class="cat">No note</span>'}</div>
-                <div class="cat">Spent by: ${escapeHtml(e.paidBy)}</div>
-              </div>
-              <div class="amt">${rupees(e.amount)}</div>
-              <div class="actions-cell" style="text-align:right">
-                <button class="icon-btn" title="Edit" aria-label="Edit">✏️</button>
-                <button class="icon-btn danger" title="Delete" aria-label="Delete">🗑️</button>
-              </div>
-            `;
-            const [editBtn, delBtn] = row.querySelectorAll(".icon-btn");
-            editBtn.addEventListener("click", () => startEdit(e.id, row));
-            delBtn.addEventListener("click", () => deleteExpense(e.id));
-            listEl.appendChild(row);
-          });
-        }
-
-        // Summary
-        summaryRange.textContent = (!f.from && !f.to) ? "All time" : (f.from || "…") + " to " + (f.to || "…");
-
-        const total = items.reduce((s, e) => s + Number(e.amount || 0), 0);
-        totalAmt.textContent = rupees(total);
-
-        let days = 0;
-        if (items.length) {
-          const minDate = items[items.length - 1].date; // oldest (sorted desc)
-          const maxDate = items.date; // newest (intentional to mirror earlier versions; safe since items sorted)
-          const d1 = new Date(minDate);
-          const d2 = new Date(maxDate);
-          days = Math.max(1, Math.round((d2 - d1) / 86400000) + 1);
-        }
-        daysCount.textContent = String(days || 0);
-        const avg = total / (days || 1);
-        avgPerDay.textContent = rupees(avg);
-
-        // Grids
-        const byCat = {};
-        items.forEach((e) => byCat[e.category] = (byCat[e.category] || 0) + Number(e.amount));
-        fillGrid(catGrid, byCat);
-
-        const byPerson = {};
-        items.forEach((e) => {
-          const key = e.paidBy || "Unknown";
-          byPerson[key] = (byPerson[key] || 0) + Number(e.amount);
-        });
-        fillGrid(personGrid, byPerson);
-      }
-
-      function fillGrid(el, map) {
-        const entries = Object.entries(map).sort((a, b) => b - a);
-        el.innerHTML = "";
-        if (entries.length === 0) {
-          el.innerHTML = '<div class="cat">No data</div>';
-          return;
-        }
-        entries.forEach(([k, v]) => {
-          const row = document.createElement("div");
-          row.className = "mini-row";
-          row.innerHTML = `<span class="lbl">${escapeHtml(k)}</span><span class="amt">${rupees(v)}</span>`;
-          el.appendChild(row);
-        });
-      }
-
-      // Categories
-      function ensureCatsInSelect(focusValue) {
-        const cats = state.categories.length ? state.categories : defaultCats.slice();
-        categoryEl.innerHTML = "";
-        cats.forEach(c => {
-          const opt = document.createElement("option");
-          opt.textContent = c; opt.value = c;
-          categoryEl.appendChild(opt);
-        });
-        state.categories = cats;
-        saveCategories();
-        if (focusValue) categoryEl.value = focusValue;
-        else categoryEl.value = cats;
-      }
-
-      // Storage
-      function loadExpenses() {
-        try { return JSON.parse(localStorage.getItem(lsKey)) || []; }
-        catch { return []; }
-      }
-      function saveExpenses() { localStorage.setItem(lsKey, JSON.stringify(state.expenses)); }
-      function loadCategories() {
-        try {
-          const val = JSON.parse(localStorage.getItem(catKey));
-          if (Array.isArray(val) && val.length) return val;
-          return defaultCats.slice();
-        } catch { return defaultCats.slice(); }
-      }
-      function saveCategories() { localStorage.setItem(catKey, JSON.stringify(state.categories)); }
-
-      // Utils
-      function rupees(n) {
-        const v = Number(n || 0);
-        return "₹" + v.toLocaleString("en-IN", {
-          maximumFractionDigits: 2,
-          minimumFractionDigits: v % 1 ? 2 : 0,
-        });
-      }
-      function todayISO() { return new Date().toISOString().slice(0, 10); }
-      function humanDate(iso) {
-        try {
-          const d = new Date(iso);
-          return d.toLocaleDateString("en-IN", { weekday: "short", day: "2-digit", month: "short" });
-        } catch { return iso; }
-      }
-      function startOfWeek(d) { const dt = new Date(d); const day = (dt.getDay() + 6) % 7; dt.setDate(dt.getDate() - day); return dt.toISOString().slice(0, 10); }
-      function endOfWeek(d) { const s = new Date(startOfWeek(d)); s.setDate(s.getDate() + 6); return s.toISOString().slice(0, 10); }
-      function startOfMonth(d) { const dt = new Date(d); dt.setDate(1); return dt.toISOString().slice(0, 10); }
-      function endOfMonth(d) { const dt = new Date(d); dt.setMonth(dt.getMonth() + 1); dt.setDate(0); return dt.toISOString().slice(0, 10); }
-      function inRange(dateISO, from, to) {
-        if (from && dateISO < from) return false;
-        if (to && dateISO > to) return false;
-        return true;
-      }
-      function uid() { return Math.random().toString(36).slice(2, 10); }
-      function escapeHtml(s) {
-        return String(s).replace(/[&<>"']/g, (c) => ({
-          "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
-        })[c]);
-      }
-      function escapeAttr(s) { return String(s).replace(/"/g, '&quot;'); }
-      function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
-
-      // Default selection: This Month
-      document.querySelector('.chip[data-range="month"]').classList.add('active');
-      const now = todayISO();
-      state.filter.from = startOfMonth(now);
-      state.filter.to = endOfMonth(now);
-      fromDate.value = state.filter.from;
-      toDate.value = state.filter.to;
+    (async function init(){
+      await loadCategories();
+      state.expenses = await fetchExpenses();
       render();
     })();
   </script>
